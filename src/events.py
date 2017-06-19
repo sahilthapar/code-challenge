@@ -33,10 +33,21 @@ class OrderEvent(Event):
 class CustomerEvent(Event):
   def __init__(self, customer_event):
     Event.__init__(self, customer_event)
-    self.customer_id = self['key']
+    self.customer_id = self.key
     self.last_name = customer_event['last_name']
     self.adr_city = customer_event['adr_city']
     self.adr_state = customer_event['adr_state']
     self.site_visits = 0
     self.total_amount = 0.0
     self.average_ltv = 0.0
+
+  def fromOtherEvent(self, event):
+    Event.__init__(self, event)
+    self.customer_id = self['key']
+
+  def increaseSiteVisit(self):
+    self.site_visits += 1
+
+  def addOrderAmount(self, event):
+    self.total_amount += float(event['total_amount'].replace(' USD', ''))
+
