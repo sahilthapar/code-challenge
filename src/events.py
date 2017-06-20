@@ -104,6 +104,7 @@ class CustomerEvent(Event):
     self.total_amount = 0.0
     self.average_ltv = 0.0
     self.latest_update = None
+    self.earliest_update = self.event_time
 
   def increaseSiteVisit(self):
     """
@@ -135,6 +136,7 @@ class CustomerEvent(Event):
     :return: 
     """
     event_time = parseDate(customer_event.get('event_time'))
+    self.earliest_update = min(event_time, self.earliest_update)
     if (not self.latest_update) or (event_time >= self.latest_update):
       self.latest_update = event_time
       self.last_name = customer_event.get('last_name', '')
@@ -148,9 +150,9 @@ class CustomerEvent(Event):
     :return: 
     """
     d1_ts = time.mktime(latest_time.timetuple())
-    d2_ts = time.mktime(self.event_time.timetuple())
-    weeks = int(d1_ts - d2_ts) / (3600 * 24 * 7)
-    a = (self.total_amount / self.site_visits) * (self.site_visits / weeks) if weeks else 0
+    d2_ts = time.mktime(self.earliest_update.timetuple())
+    weeks = float(int(d1_ts - d2_ts) / (3600 * 24 * 7))
+    a = 0 if (weeks == 0 or self.site_visits == 0) else (self.total_amount / self.site_visits) * (self.site_visits / weeks)
     t = 10
     self.average_ltv = 52 * a * t
 
