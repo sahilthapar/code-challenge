@@ -1,5 +1,4 @@
 from events import *
-from datastore import *
 
 
 def enum(**enums):
@@ -7,8 +6,9 @@ def enum(**enums):
 
 Type = enum(IMAGE='IMAGE', SITE_VISIT='SITE_VISIT', ORDER='ORDER', CUSTOMER='CUSTOMER')
 
+
 def getCustomerId(event):
-  return (event.get('customer_id') or event.get('key'))
+  return event.get('customer_id') or event.get('key')
 
 
 def ingest(event, datastore):
@@ -16,7 +16,6 @@ def ingest(event, datastore):
 
   customer_id = getCustomerId(event)
   customer = datastore.customers.get(customer_id, None)
-
   if not customer:
     customer = CustomerEvent(event)
     datastore.add_customer(customer)

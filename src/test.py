@@ -136,7 +136,7 @@ class Test(unittest.TestCase):
     self.assertEqual(self.D.customers["97f55c7d8f42"].total_amount, 12.34)
 
     top_two = topXSimpleLTVCustomers(2, self.D)
-    self.assertEqual(top_two[0], (-52 * (14.34 / 2) * 2 * 10, '96f55c7d8f42', ))
-    self.assertEqual(top_two[1], (-52 * 12.34 * 1 * 10, '97f55c7d8f42'))
+    self.assertEqual(top_two[0].average_ltv, (52 * (14.34 / 2) * 2 * 10))
+    self.assertEqual(top_two[1].average_ltv, (52 * 12.34 * 1 * 10))
 
 

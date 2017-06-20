@@ -1,8 +1,4 @@
-import datetime
-
-def parseDate(date_str):
-  format = "%Y-%m-%dT%H:%M:%S.%f"
-  return datetime.datetime.strptime(date_str.replace("Z", ""), format)
+from utils import parseDate
 
 class Datastore():
   def __init__(self):
