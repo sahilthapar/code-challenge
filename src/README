@@ -1,1 +1,10 @@
-Your source files reside in this directory
+# Disclaimers
+
+- All events are expected to have two properties at least
+    - key
+    - event_time
+
+- Only completed weeks are considered for LTV calculation
+    - 10 days is still 1 week
+    - Customers who have been using the website for less than 1 week are
+    considered to have insufficient data and have been assigned an LTV value of 0.
