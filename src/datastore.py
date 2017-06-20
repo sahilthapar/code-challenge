@@ -54,7 +54,8 @@ class Datastore():
     :param event: 
     :return: 
     """
-    self.site_visits[site_visit.key] = site_visit
+    site_visit_key = site_visit.key + site_visit.customer_id + str(site_visit.event_time)
+    self.site_visits[site_visit_key] = site_visit
 
   def add_image(self, image):
     """
@@ -62,7 +63,8 @@ class Datastore():
     :param event: 
     :return: 
     """
-    self.images[image.key] = image
+    image_key = image.key + image.customer_id
+    self.images[image_key] = image
 
   def add_event(self, event):
     """

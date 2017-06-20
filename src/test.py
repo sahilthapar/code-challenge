@@ -24,9 +24,9 @@ class Test(unittest.TestCase):
 
     # Check all events were added
     self.assertIn("96f55c7d8f42", self.D.customers)
-    self.assertIn("ac05e815502f", self.D.site_visits)
-    self.assertIn("d8ede43b1d9f", self.D.images)
-    self.assertIn("68d84e5d1a43", self.D.orders)
+    self.assertEqual(len(self.D.site_visits), 1)
+    self.assertEqual(len(self.D.images), 1)
+    self.assertEqual(len(self.D.orders), 1)
 
     # Check Customer site visits were increased
     self.assertEqual(self.D.customers["96f55c7d8f42"].site_visits, 1)
@@ -42,9 +42,9 @@ class Test(unittest.TestCase):
     # Check all events were added
     self.assertIn("96f55c7d8f42", self.D.customers)
     self.assertEqual(len(self.D.customers), 1)
-    self.assertIn("ac05e815502f", self.D.site_visits)
-    self.assertIn("d8ede43b1d9f", self.D.images)
-    self.assertIn("68d84e5d1a43", self.D.orders)
+    self.assertEqual(len(self.D.site_visits), 1)
+    self.assertEqual(len(self.D.images), 1)
+    self.assertEqual(len(self.D.orders), 1)
 
     # Check Customer site visits were increased
     self.assertEqual(self.D.customers["96f55c7d8f42"].site_visits, 1)
@@ -62,9 +62,9 @@ class Test(unittest.TestCase):
     # Check all events were added
     self.assertIn("96f55c7d8f42", self.D.customers)
     self.assertEqual(len(self.D.customers), 1)
-    self.assertIn("ac05e815502f", self.D.site_visits)
-    self.assertIn("d8ede43b1d9f", self.D.images)
-    self.assertIn("68d84e5d1a43", self.D.orders)
+    self.assertEqual(len(self.D.site_visits), 1)
+    self.assertEqual(len(self.D.images), 1)
+    self.assertEqual(len(self.D.orders), 1)
 
     # Check Customer site visits were increased
     self.assertEqual(self.D.customers["96f55c7d8f42"].site_visits, 1)
@@ -83,9 +83,9 @@ class Test(unittest.TestCase):
     # Check all events were added
     self.assertIn("96f55c7d8f42", self.D.customers)
     self.assertEqual(len(self.D.customers), 1)
-    self.assertIn("ac05e815502f", self.D.site_visits)
-    self.assertIn("d8ede43b1d9f", self.D.images)
-    self.assertIn("68d84e5d1a43", self.D.orders)
+    self.assertEqual(len(self.D.site_visits), 1)
+    self.assertEqual(len(self.D.images), 1)
+    self.assertEqual(len(self.D.orders), 1)
 
     # Check Customer site visits were increased
     self.assertEqual(self.D.customers["96f55c7d8f42"].site_visits, 1)
@@ -101,9 +101,9 @@ class Test(unittest.TestCase):
     # Check all events were added
     self.assertIn("96f55c7d8f42", self.D.customers)
     self.assertEqual(len(self.D.customers), 1)
-    self.assertIn("ac05e815502f", self.D.site_visits)
-    self.assertIn("d8ede43b1d9f", self.D.images)
-    self.assertIn("68d84e5d1a43", self.D.orders)
+    self.assertEqual(len(self.D.site_visits), 1)
+    self.assertEqual(len(self.D.images), 1)
+    self.assertEqual(len(self.D.orders), 1)
 
     # Check Customer site visits were increased
     self.assertEqual(self.D.customers["96f55c7d8f42"].site_visits, 1)
@@ -120,11 +120,9 @@ class Test(unittest.TestCase):
     self.assertIn("96f55c7d8f42", self.D.customers)
     self.assertIn("97f55c7d8f42", self.D.customers)
     self.assertEqual(len(self.D.customers), 2)
-    self.assertIn("ac05e815502f", self.D.site_visits)
-    self.assertIn("bc05e815502f", self.D.site_visits)
-    self.assertIn("d8ede43b1d9f", self.D.images)
-    self.assertIn("e8ede43b1d9f", self.D.images)
-    self.assertIn("68d84e5d1a43", self.D.orders)
+    self.assertEqual(len(self.D.site_visits), 2)
+    self.assertEqual(len(self.D.images), 2)
+    self.assertEqual(len(self.D.orders), 2)
     self.assertIn("18d84e5d1a43", self.D.orders)
 
     # Check Customer site visits were increased
@@ -148,12 +146,9 @@ class Test(unittest.TestCase):
     self.assertIn("96f55c7d8f42", self.D.customers)
     self.assertIn("97f55c7d8f42", self.D.customers)
     self.assertEqual(len(self.D.customers), 2)
-    self.assertIn("ac05e815502f", self.D.site_visits)
-    self.assertIn("bc05e815502f", self.D.site_visits)
-    self.assertIn("d8ede43b1d9f", self.D.images)
-    self.assertIn("e8ede43b1d9f", self.D.images)
-    self.assertIn("68d84e5d1a43", self.D.orders)
-    self.assertIn("18d84e5d1a43", self.D.orders)
+    self.assertEqual(len(self.D.site_visits), 2)
+    self.assertEqual(len(self.D.images), 2)
+    self.assertEqual(len(self.D.orders), 2)
 
     # Check Customer site visits were increased
     self.assertEqual(self.D.customers["96f55c7d8f42"].site_visits, 2)
