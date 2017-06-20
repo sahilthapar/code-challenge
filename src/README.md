@@ -19,6 +19,18 @@
     - Only latest customer info, order info is available
     - This can be easily changed by changing the implementation of datastore to append events
 
-How to use
 
-#
+# To run tests
+
+```
+cd src
+python -m unittest test
+```
+
+# How to use
+
+- Change path in src/main.py to desired input file
+
+```
+python src/main.py
+```
