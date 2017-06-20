@@ -3,6 +3,10 @@
 - All events are expected to have two properties at least
     - key
     - event_time
+    
+- Although out of sync events are handled it is still expected that event_time
+are in the correct 'logical' order
+    - An ORDER event's timestamp will be after a NEW CUSTOMER event's timestamp
 
 - Only completed weeks are considered for LTV calculation
     - 10 days is still 1 week
