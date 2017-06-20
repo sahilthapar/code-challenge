@@ -1,24 +1,9 @@
-from events import *
+import heapq
 
-def enum(**enums):
-  """
-  # https://stackoverflow.com/questions/36932/how-can-i-represent-an-enum-in-python
-  :param enums: 
-  :return: enum
-  """
-  return type('Enum', (), enums)
+from events import *
+from utils import getCustomerId, enum
 
 Type = enum(IMAGE='IMAGE', SITE_VISIT='SITE_VISIT', ORDER='ORDER', CUSTOMER='CUSTOMER')
-
-
-def getCustomerId(event):
-  """
-  Get the customer id from the event
-  :param event: 
-  :return: id
-  """
-  return event.get('customer_id') or event.get('key')
-
 
 def ingest(event, datastore):
   """
@@ -61,6 +46,20 @@ def ingest(event, datastore):
   datastore.updateLatestTime(event)
   return datastore
 
+
+def topXSimpleLTVCustomers(x, database):
+  """
+  Returns the top x customers based on simples ltv based on a heap 
+  https://stackoverflow.com/questions/2501457/what-do-i-use-for-a-max-heap-implementation-in-python
+  :param x: number of top customers desired
+  :param database: 
+  :return: top x customers based on simple ltv
+  """
+  minh = []
+  for customer_id, customer in database.customers.items():
+    customer.updateAverageLTV(database.latest_time)
+    heapq.heappush(minh, (-customer.average_ltv, customer))
+  return [c for ltv, c in minh[:x]]
 
 
 

@@ -18,3 +18,7 @@
 - History of events is not maintained
     - Only latest customer info, order info is available
     - This can be easily changed by changing the implementation of datastore to append events
+
+How to use
+
+#
