@@ -23,21 +23,24 @@ def ingest(event, datastore):
 
   if event['type'] == Type.IMAGE:
     image = ImageEvent(event)
-    return datastore.add_image(image)
+    datastore.add_image(image)
   elif event['type'] == Type.SITE_VISIT:
     site_visit = SiteVisitEvent(event)
     customer.increaseSiteVisit()
-    return datastore.add_site_visit(site_visit)
+    datastore.add_site_visit(site_visit)
   elif event['type'] == Type.ORDER:
     order = OrderEvent(event)
     customer.updateOrderAmount(order, datastore.orders)
-    return datastore.add_order(order)
+    datastore.add_order(order)
   elif event['type'] == Type.CUSTOMER:
     customer.updateCustomerProps(event)
-    return datastore.add_customer(customer)
+    datastore.add_customer(customer)
   else:
     e = Event(event)
-    return datastore.add_event(e)
+    datastore.add_event(e)
+
+  datastore.updateInitAndLatestTime(event)
+  return datastore
 
 
 

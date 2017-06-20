@@ -185,11 +185,11 @@ class Test(unittest.TestCase):
                "customer_id": "96f55c7d8f42", "tags": [{"some key": "some value"}]},
               {"type": "IMAGE", "verb": "UPLOAD", "key": "d8ede43b1d9f", "event_time": "2017-01-06T12:47:12.344Z",
                "customer_id": "97f55c7d8f42", "camera_make": "Canon", "camera_model": "EOS 80D"},
-              {"type": "ORDER", "verb": "UPDATE", "key": "18d84e5d1a43", "event_time": "2017-02-06T12:55:55.555Z",
+              {"type": "ORDER", "verb": "UPDATE", "key": "18d84e5d1a43", "event_time": "2017-01-07T12:55:55.555Z",
                "customer_id": "96f55c7d8f42", "total_amount": "14.34 USD"},
               {"type": "ORDER", "verb": "NEW", "key": "68d84e5d1a43", "event_time": "2017-01-06T12:55:55.555Z",
                "customer_id": "97f55c7d8f42", "total_amount": "14.34 USD"},
-              {"type": "CUSTOMER", "verb": "UPDATE", "key": "96f55c7d8f42", "event_time": "2017-02-06T12:46:45.384Z",
+              {"type": "CUSTOMER", "verb": "UPDATE", "key": "96f55c7d8f42", "event_time": "2017-01-07T12:46:45.384Z",
                "last_name": "Smith", "adr_city": "Middletown", "adr_state": "OH"},
               {"type": "CUSTOMER", "verb": "NEW", "key": "97f55c7d8f42", "event_time": "2017-01-06T12:46:45.384Z",
                "last_name": "Smith", "adr_city": "Middletown", "adr_state": "AK"},
@@ -197,13 +197,13 @@ class Test(unittest.TestCase):
                "customer_id": "97f55c7d8f42", "tags": [{"some key": "some value"}]},
               {"type": "IMAGE", "verb": "UPLOAD", "key": "e8ede43b1d9f", "event_time": "2017-01-06T12:47:12.344Z",
                "customer_id": "96f55c7d8f42", "camera_make": "Canon", "camera_model": "EOS 80D"},
-              {"type": "ORDER", "verb": "UPDATE", "key": "68d84e5d1a43", "event_time": "2017-02-06T12:55:55.555Z",
+              {"type": "ORDER", "verb": "UPDATE", "key": "68d84e5d1a43", "event_time": "2017-01-07T12:55:55.555Z",
                "customer_id": "97f55c7d8f42", "total_amount": "12.34 USD"},
               {"type": "ORDER", "verb": "NEW", "key": "18d84e5d1a43", "event_time": "2017-01-06T12:55:55.555Z",
                "customer_id": "96f55c7d8f42", "total_amount": "12.34 USD"},
               {"type": "CUSTOMER", "verb": "NEW", "key": "96f55c7d8f42", "event_time": "2017-01-06T12:46:45.384Z",
                "last_name": "Smith", "adr_city": "Middletown", "adr_state": "AK"},
-              {"type": "CUSTOMER", "verb": "UPDATE", "key": "97f55c7d8f42", "event_time": "2017-02-06T12:46:45.384Z",
+              {"type": "CUSTOMER", "verb": "UPDATE", "key": "97f55c7d8f42", "event_time": "2017-01-14T12:45:45.384Z",
                "last_name": "Smith", "adr_city": "Middletown", "adr_state": "OH"}
               ]
     for e in events:
@@ -228,6 +228,8 @@ class Test(unittest.TestCase):
     self.assertEqual(self.D.customers["96f55c7d8f42"].total_amount, 14.34)
     self.assertEqual(self.D.customers["97f55c7d8f42"].total_amount, 12.34)
 
-    
+    top_two = topXSimpleLTVCustomers(2, self.D)
+    self.assertEqual(top_two[0], (-52 * (14.34 / 2) * 2 * 10, '96f55c7d8f42', ))
+    self.assertEqual(top_two[1], (-52 * 12.34 * 1 * 10, '97f55c7d8f42'))
 
 

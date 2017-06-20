@@ -1,4 +1,5 @@
 import datetime
+import time
 
 
 def parseDate(date_str):
@@ -61,6 +62,14 @@ class CustomerEvent(Event):
       self.adr_city = customer_event.get('adr_city', '')
       self.adr_state = customer_event.get('adr_state', '')
       self.latest_update = event_time
+
+  def updateAverageLTV(self, latest_time):
+    d1_ts = time.mktime(latest_time.timetuple())
+    d2_ts = time.mktime(self.event_time.timetuple())
+    weeks = int(d1_ts - d2_ts) / (3600 * 24 * 7)
+    a = (self.total_amount / self.site_visits) * (self.site_visits / weeks)
+    t = 10
+    self.average_ltv = 52 * a * t
 
 
 
