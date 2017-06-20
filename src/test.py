@@ -139,4 +139,32 @@ class Test(unittest.TestCase):
     self.assertEqual(top_two[0].average_ltv, (52 * (14.34 / 2) * 2 * 10))
     self.assertEqual(top_two[1].average_ltv, (52 * 12.34 * 1 * 10))
 
+  def test_multiple_customers_orders_site_visits_0_weeks(self):
+    events = multiple_customers_order_site_visits_0_weeks
+    for e in events:
+      ingest(e, self.D)
+
+    # Check all events were added
+    self.assertIn("96f55c7d8f42", self.D.customers)
+    self.assertIn("97f55c7d8f42", self.D.customers)
+    self.assertEqual(len(self.D.customers), 2)
+    self.assertIn("ac05e815502f", self.D.site_visits)
+    self.assertIn("bc05e815502f", self.D.site_visits)
+    self.assertIn("d8ede43b1d9f", self.D.images)
+    self.assertIn("e8ede43b1d9f", self.D.images)
+    self.assertIn("68d84e5d1a43", self.D.orders)
+    self.assertIn("18d84e5d1a43", self.D.orders)
+
+    # Check Customer site visits were increased
+    self.assertEqual(self.D.customers["96f55c7d8f42"].site_visits, 2)
+    self.assertEqual(self.D.customers["97f55c7d8f42"].site_visits, 1)
+
+    # Check if Order Amount is added
+    self.assertEqual(self.D.customers["96f55c7d8f42"].total_amount, 14.34)
+    self.assertEqual(self.D.customers["97f55c7d8f42"].total_amount, 12.34)
+
+    top_two = topXSimpleLTVCustomers(2, self.D)
+    self.assertEqual(top_two[0].average_ltv, 0)
+    self.assertEqual(top_two[1].average_ltv, 0)
+
 

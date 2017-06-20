@@ -9,7 +9,7 @@ class Datastore():
     self.images = {}
     self.events = {}
 
-  def updateInitAndLatestTime(self, event):
+  def updateLatestTime(self, event):
     self.latest_time = max(self.latest_time, parseDate(event.get('event_time')))
 
   def add_customer(self, customer):
